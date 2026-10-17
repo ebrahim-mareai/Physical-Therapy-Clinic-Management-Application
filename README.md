@@ -1,85 +1,80 @@
-# Physical Therapy Clinic Patient and Visit Management
+# Physical Therapy Clinic Patient and Visit Management System
 
-A Python desktop application for managing patient registration, the
-waiting queue, treatment plans, visit records, and patient history in a
-physical therapy clinic.
-
-## Overview
-
-The application uses a Tkinter graphical interface and a local SQLite
-database. Clinic staff can register patients, review the waiting queue,
-prepare ordered treatment plans, record completed visits, review visit
-history, and exchange selected clinic records through Excel files.
-
-The project is organized into three Jupyter notebooks.
-
-## Project Structure
-
-``` text
-.
-├── main.ipynb
-├── UserInterface.ipynb
-└── BusinessLogic.ipynb
-```
-
--   **`main.ipynb`** starts the application, loads the other notebooks,
-    connects the interface controls to their handlers, loads the patient
-    queue, and starts the desktop window.
--   **`UserInterface.ipynb`** defines the Tkinter windows, forms,
-    tables, buttons, treatment-plan editor, visit-execution window, and
-    patient-history views.
--   **`BusinessLogic.ipynb`** manages SQLite operations, patient
-    records, duplicate matching, treatment steps, visit counts, history,
-    audit entries, and Excel import/export.
-
-Keep all three notebooks in the same directory and retain these
-filenames. The launcher refers to `BusinessLogic.ipynb` and
-`UserInterface.ipynb` by name.
+A Python desktop application for managing patient registration, waiting
+queues, treatment plans, visit records, and patient history in a
+physical therapy clinic. The application combines a Tkinter interface
+with a local SQLite database and Excel import/export tools.
 
 ## Features
 
-### Patient records and waiting queue
+### Goal 1: Patient Registration & Queue Management
 
--   Register patients with a name, phone number, age, and payment
-    status.
--   View patients waiting for treatment.
--   Identify possible duplicate records using normalized names and phone
-    numbers.
--   Review matching records before deciding whether to use an existing
-    patient or enter a different patient.
--   Edit patient details and return a completed patient to the waiting
-    queue when another visit is needed.
+-   **Patient Registration**: Record patient details, including name,
+    phone number, age, and payment status.
+-   **Duplicate Detection**: Identify potential duplicate patients using
+    normalized names and phone numbers.
+-   **Waiting Queue**: View patients waiting for treatment and manage
+    their queue status.
+-   **Patient Updates**: Review and edit existing patient information.
+-   **Return Visits**: Move a completed patient back into the queue when
+    another visit is required.
 
-### Treatment plans
+### Goal 2: Treatment Plans & Visit Tracking
 
--   Set the number of visits prescribed for a patient.
--   Create an ordered list of treatment steps.
--   Choose from the available device presets or configure a step
-    manually.
--   Record the duration and separate instructions for each step.
--   Edit, remove, and reorder steps before saving the plan.
+-   **Treatment Plans**: Set a prescribed number of visits for each
+    patient.
+-   **Ordered Treatment Steps**: Create treatment sequences with
+    devices, durations, and instructions.
+-   **Plan Editing**: Add, edit, remove, and reorder treatment steps
+    before saving a plan.
+-   **Treatment Workflow**: Display saved treatment steps for staff to
+    follow and mark steps as completed.
+-   **Visit Records**: Record completed visits and related notes.
+-   **Patient History**: Review previous visits and see prescribed,
+    completed, and remaining visit counts.
 
-### Visit execution and history
+### Goal 3: Database & Excel Integration
 
--   Display the saved treatment steps for the nurse to follow.
--   Mark treatment steps as completed.
--   Record completed visits and visit notes.
--   Display prescribed, attended, and remaining visit counts.
--   Review a patient's visit history and related treatment information.
--   Maintain audit entries for selected record changes and actions.
+-   **Local Database**: Store patient and treatment information in an
+    SQLite database.
+-   **Visit History**: Maintain records of individual visits and
+    associated notes.
+-   **Audit Records**: Keep records of selected changes and actions.
+-   **Excel Export**: Export clinic data to a workbook containing
+    `Patients`, `Visit History`, and `Recovery Steps` worksheets.
+-   **Excel Import**: Import supported patient updates by matching
+    patient IDs to existing records.
 
-### Excel import and export
+------------------------------------------------------------------------
 
--   Export clinic information to an Excel workbook.
--   The export includes `Patients`, `Visit History`, and
-    `Recovery Steps` worksheets.
--   Import supported patient updates from an Excel workbook using
-    patient IDs to identify existing records.
+## Tech Stack
+
+-   **Language**: Python 3
+-   **GUI Framework**: `tkinter` and `ttk`
+-   **Database**: `sqlite3` (Local)
+-   **Data Handling**: `pandas`
+-   **Excel Support**: `openpyxl`
+-   **Notebook Environment**: JupyterLab / IPython
+-   **Architecture**: Modular notebook-based structure separating
+    application startup, user interface, and business logic
+
+------------------------------------------------------------------------
+
+## Project Structure
+
+The project is organized into three Jupyter Notebooks:
+
+``` text
+├── main.ipynb             # Application entry point and startup sequence
+├── UserInterface.ipynb    # Tkinter interface, forms, queue, and treatment windows
+└── BusinessLogic.ipynb    # Patient records, treatment plans, visits, database, and Excel operations
+```
 
 ## Requirements
 
--   Python 3 with Tkinter support
--   JupyterLab or another IPython/Jupyter environment
+-   Python 3
+-   Tkinter support
+-   JupyterLab or another compatible Jupyter/IPython environment
 -   `pandas`
 -   `openpyxl`
 
@@ -90,15 +85,15 @@ python -m pip install jupyterlab pandas openpyxl
 ```
 
 Tkinter is included with many standard Python installations. On some
-Linux distributions, it must be installed separately through the
+Linux distributions, it may need to be installed separately through the
 operating system's package manager.
 
 ## Run the Application
 
-1.  Download or clone this repository.
+1.  Clone or download this repository.
 
-2.  Confirm that `main.ipynb`, `UserInterface.ipynb`, and
-    `BusinessLogic.ipynb` are in the same directory.
+2.  Keep `main.ipynb`, `UserInterface.ipynb`, and `BusinessLogic.ipynb`
+    in the same directory.
 
 3.  Open a terminal in that directory and start JupyterLab:
 
@@ -106,47 +101,38 @@ operating system's package manager.
     jupyter lab
     ```
 
-4.  Open `main.ipynb` in JupyterLab.
+4.  Open `main.ipynb`.
 
-5.  Run the notebook cells in order. The launcher loads the
-    business-logic and user-interface notebooks, then opens the clinic
-    desktop window.
+5.  Run the notebook cells in order. The main notebook loads the
+    business logic and user interface notebooks and starts the desktop
+    application.
 
-The application requires a graphical desktop session. A headless
-notebook service or a platform without Tkinter window support will not
-display the interface as intended.
+The application uses Tkinter windows, so it needs a graphical desktop
+session. A headless notebook service may not be able to display the
+interface.
 
-## Local Database
+## Data Storage
 
-The application stores its data in a SQLite database named `clinic.db`,
-created or updated in the application's working directory.
+The application uses a local SQLite database named `clinic.db`, created
+or updated in the application's working directory. Keep the database in
+the directory used to run the application so the expected records can be
+found.
 
-The database contains patient records and related treatment and visit
-information. Back up `clinic.db` before making changes to the
-environment, importing data, or testing database updates. Keep the
-database in the same working directory used to run the application so
-that the expected records are loaded.
+Back up the database before testing imports or making changes to clinic
+records.
 
-## Data and Privacy
+## Privacy
 
 Patient names, phone numbers, ages, payment status, treatment
-instructions, and visit history may be sensitive information. Do not
-commit real patient records, exported workbooks, or a populated
-`clinic.db` file to a public repository. Use synthetic data for
-demonstrations and testing, and store real clinic records only in an
-appropriately controlled environment.
-
-The current project is a local desktop application. The notebooks do not
-provide a hosted web service, remote database synchronization, or
-login-based user authentication. Access to the computer and its files
-should therefore be managed carefully.
+instructions, and visit history may be sensitive. Do not upload real
+patient records, exported workbooks, or a populated `clinic.db` file to
+a public repository. Use synthetic data for demonstrations and testing.
 
 ## Current Scope
 
-This repository contains the application notebooks. It does not include
-a bundled sample database or a packaged desktop installer. Excel
-import/export depends on the installed Python packages and compatible
-workbook files.
+This repository contains the Jupyter notebooks for a local desktop
+application. It does not, by itself, provide a hosted web application or
+remote database service.
 
 ## License
 
