@@ -1,4 +1,4 @@
-# Physical Therapy Clinic Patient and Visit Management System
+# Physical Therapy Clinic Management Application
 
 A Python desktop application for managing patient registration, waiting
 queues, treatment plans, visit records, and patient history in a
@@ -70,71 +70,8 @@ The project is organized into three Jupyter Notebooks:
 └── BusinessLogic.ipynb    # Patient records, treatment plans, visits, database, and Excel operations
 ```
 
-## Requirements
-
--   Python 3
--   Tkinter support
--   JupyterLab or another compatible Jupyter/IPython environment
--   `pandas`
--   `openpyxl`
-
-Install the Python packages from a terminal:
-
-``` bash
-python -m pip install jupyterlab pandas openpyxl
-```
-
-Tkinter is included with many standard Python installations. On some
-Linux distributions, it may need to be installed separately through the
-operating system's package manager.
-
-## Run the Application
-
-1.  Clone or download this repository.
-
-2.  Keep `main.ipynb`, `UserInterface.ipynb`, and `BusinessLogic.ipynb`
-    in the same directory.
-
-3.  Open a terminal in that directory and start JupyterLab:
-
-    ``` bash
-    jupyter lab
-    ```
-
-4.  Open `main.ipynb`.
-
-5.  Run the notebook cells in order. The main notebook loads the
-    business logic and user interface notebooks and starts the desktop
-    application.
-
-The application uses Tkinter windows, so it needs a graphical desktop
-session. A headless notebook service may not be able to display the
-interface.
-
-## Data Storage
-
-The application uses a local SQLite database named `clinic.db`, created
-or updated in the application's working directory. Keep the database in
-the directory used to run the application so the expected records can be
-found.
-
-Back up the database before testing imports or making changes to clinic
-records.
-
-## Privacy
-
-Patient names, phone numbers, ages, payment status, treatment
-instructions, and visit history may be sensitive. Do not upload real
-patient records, exported workbooks, or a populated `clinic.db` file to
-a public repository. Use synthetic data for demonstrations and testing.
-
 ## Current Scope
 
 This repository contains the Jupyter notebooks for a local desktop
 application. It does not, by itself, provide a hosted web application or
 remote database service.
-
-## License
-
-No license file is currently included. Contact the repository owner
-before reusing or redistributing the code.
